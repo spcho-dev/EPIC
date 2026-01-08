@@ -27,6 +27,10 @@ EPIC/
 │   ├── HNSC/
 │   ├── LUAD/
 │   ├── PRAD/
+│   ├── pos-BRCA-genename.txt
+│   ├── pos-HNSC-genename.txt
+│   ├── pos-LUAD-genename.txt
+│   ├── pos-PRAD-genename.txt
 │   └── STRING_ppi_edgelist.tsv
 ├── outputs/                     # Directory for prediction results and plots
 ├── trained_models/              # Directory for saving trained model weights
@@ -63,8 +67,9 @@ The raw multi-omics data were obtained from the **[UCSC Xena Browser](https://xe
 To ensure data consistency across modalities, we performed a rigorous preprocessing step. We intersected the samples and genes across the mutation and expression datasets, retaining only those entities present in both. Consequently, the final preprocessed dataset comprises a unified set of **18,616 genes** across all cancer types. The preprocessed, ready-to-use data are located in the respective cancer type folders (e.g., `Data/BRCA/`).
 
 * **Original Source**: `Data/xena_org_multiomics/`
-* **Model Input**: `Data/{Cancer_Type}/` (e.g., `Data/BRCA/HiSeqV2_common_samples_genes_sorted.tsv`)
+* **Multi-omics**: `Data/{Cancer_Type}/` (e.g., `Data/BRCA/HiSeqV2_common_samples_genes_sorted.tsv`)
 * **Global Network**: `Data/STRING_ppi_edgelist.tsv`
+* **Ground Truth**: `Data/pos-{Cancer_Type}-genename.txt` (List of known driver genes)
 
 
 #### 2. Training
