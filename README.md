@@ -19,7 +19,7 @@
 
 The framework consists of two main components implemented in `model.py`:
 
-1. **EPIC Encoder (`EPIC` class)**
+1. **GNN Encoder (`EPIC` class)**
    - A **Heterogeneous Graph Neural Network** (GNN) backbone based on `GATv2Conv`.
    - Aggregates multi-omics context from the **PPI network** (Gene-Gene) and **Mutation bipartite graph** (Patient-Gene).
    - Implements an **Information Flow** mechanism that tracks residual feature updates (flow vectors) to enforce **Variance** and **Diversity** constraints, ensuring representation robustness against over-smoothing.
