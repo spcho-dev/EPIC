@@ -45,6 +45,18 @@ The framework consists of two main components implemented in `model.py`:
 
 2. **LinkPredictor**: A Prototypical Metric Learning head that projects patient-gene pairs into an event space and calculates priority scores based on distances to `Driver` and `Passenger` prototypes.
 
+1. **EPIC Encoder (`EPIC` class)**
+   - A **Heterogeneous Graph Neural Network** (GNN) backbone based on `GATv2Conv`.
+   - Aggregates multi-omics context from the **PPI network** (Gene-Gene) and **Mutation bipartite graph** (Patient-Gene).
+   - Implements an **Information Flow** mechanism that tracks residual feature updates (flow vectors) to enforce **Variance** and **Diversity** constraints, ensuring representation robustness against over-smoothing.
+
+2. **LinkPredictor (`LinkPredictor` class)**
+   - Implements the **Event Prototyping** strategy.
+   - **Event Embedding**: Fuses the learned Patient and Gene embeddings into a unified latent vector representing the specific mutation event.
+   - **Metric Learning**: Learns two global prototypes—**Driver Prototype** ($\mathbf{p}_{driver}$) and **Passenger Prototype** ($\mathbf{p}_{passenger}$).
+   - **Scoring**: Calculates the priority score based on the relative Euclidean distance:
+     $$Score = \|\mathbf{z} - \mathbf{p}_{passenger}\|^2 - \|\mathbf{z} - \mathbf{p}_{driver}\|^2$$
+
 ---
 
 ## Usage
