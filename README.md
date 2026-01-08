@@ -40,7 +40,8 @@ EPIC/
 │   ├── xena_org_multiomics/     # Original raw data from UCSC Xena Browser
 │   │   ├── BRCA/                # Original HiSeqV2 and mc3_gene_level files
 │   │   ├── HNSC/
-│   │   ├── ...
+│   │   ├── LUAD/
+│   │   ├── PRAD/
 │   ├── BRCA/                    # Preprocessed Cancer-specific data
 │   ├── HNSC/
 │   ├── LUAD/
