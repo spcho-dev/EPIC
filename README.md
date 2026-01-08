@@ -98,10 +98,15 @@ To ensure data consistency across modalities, we performed a rigorous preprocess
 
 ### 2. Training
 Train the EPIC model. This script initializes the heterogeneous graph, applies the Information Constrained GNN encoder, and optimizes the Event Prototyping objective.
+> **Note**: You can modify `CANCER_TYPE` (default: 'BRCA') and hyperparameters (Epochs, Learning Rate) inside `train.py`.
 
 ```bash
 python train.py
 ```
+
+* **Outputs**: The trained model weights are saved in the `trained_models/` directory.
+    * `epic_gnn_{Cancer_Type}.pth`: Weights for the GNN encoder.
+    * `epic_predictor_{Cancer_Type}.pth`: Weights for the LinkPredictor (Prototyping head).
 
 ### 3. Prediction
 Generate personalized driver gene rankings for each patient using the trained model.
@@ -109,6 +114,9 @@ Generate personalized driver gene rankings for each patient using the trained mo
 ```bash
 python predict.py
 ```
+* **Outputs**: Results are saved in `outputs/{Cancer_Type}/result/`.
+    * `final_ranking.txt`: A tab-separated matrix containing the full ranked list of mutated genes for every patient. (Rows: Genes, Columns: Patient IDs).
+    * `priority.txt`: A population-level priority list aggregated using the Condorcet voting method (Gene Name & Vote Frequency).
 
 ### 4. Evaluation
 Evaluate the model's performance using Two-Track metrics (Cohort-level & Individual-level).
