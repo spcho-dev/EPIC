@@ -47,9 +47,7 @@ The framework consists of two main components implemented in `model.py`:
    - Implements the **Event Prototyping** strategy.
    - **Event Embedding**: Fuses the learned Patient and Gene embeddings into a unified latent vector representing the specific mutation event.
    - **Metric Learning**: Learns two global prototypes—**Driver Prototype** ($\mathbf{p}_{driver}$) and **Passenger Prototype** ($\mathbf{p}_{passenger}$).
-   - **Scoring**: Calculates the priority score based on the relative Euclidean distance:
-     $$Score = \|\mathbf{z} - \mathbf{p}_{passenger}\|^2 - \|\mathbf{z} - \mathbf{p}_{driver}\|^2$$
-
+   - **Scoring**: Calculates the priority score based on the relative Euclidean distance
 
 
 ### Usage
