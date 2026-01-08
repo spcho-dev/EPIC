@@ -18,7 +18,12 @@
 ```bash
 EPIC/
 ├── Data/                        # Input data directory (TCGA mutations, expression, PPI)
-│   ├── BRCA/                    # Cancer-specific data
+│   ├── xena_org_multiomics/     # Original raw data from UCSC Xena Browser
+│   │   ├── BRCA/                # Original HiSeqV2 and mc3_gene_level files
+│   │   ├── HNSC/
+│   │   ├── LUAD/
+│   │   └── PRAD/
+│   ├── BRCA/                    # Preprocessed Cancer-specific data
 │   ├── HNSC/
 │   ├── LUAD/
 │   ├── PRAD/
@@ -46,18 +51,21 @@ The framework consists of two main components implemented in `model.py`:
 2. **LinkPredictor (`LinkPredictor` class)**
    - Implements the **Event Prototyping** strategy.
    - **Event Embedding**: Fuses the learned Patient and Gene embeddings into a unified latent vector representing the specific mutation event.
-   - **Metric Learning**: Learns two global prototypes—**Driver Prototype** ($\mathbf{p}_{driver}$) and **Passenger Prototype** ($\mathbf{p}_{passenger}$).
-   - **Scoring**: Calculates the priority score based on the relative Euclidean distance
+   - **Metric Learning**: Learns two global prototypes—**Driver Prototype** and **Passenger Prototype**.
+   - **Scoring**: Calculates the priority score based on the relative Euclidean distance. The score is defined as the difference between the distance to the Passenger Prototype and the distance to the Driver Prototype. A higher score indicates that the event is closer to the Driver Prototype and further from the Passenger Prototype.
 
 
 ### Usage
 
-#### 1. Data Preparation
-Place your raw data files in the `Data/` directory. The project expects the following structure for each cancer type (e.g., `BRCA`):
-* `pos-BRCA-genename.txt`: Ground truth driver genes.
-* `HiSeqV2_common_samples_genes_sorted.tsv`: Gene expression matrix.
-* `mc3_gene_level_common_samples_genes_sorted.tsv`: Somatic mutation matrix.
-* `STRING_ppi_edgelist.tsv`: Global PPI network file.
+### 1. Data Preparation
+The raw multi-omics data were obtained from the **[UCSC Xena Browser](https://xenabrowser.net/datapages/)**. The original files (Gene Expression: `HiSeqV2` and Somatic Mutation: `mc3_gene_level`) are stored in the `Data/xena_org_multiomics/` directory.
+
+To ensure data consistency across modalities, we performed a rigorous preprocessing step. We intersected the samples and genes across the mutation and expression datasets, retaining only those entities present in both. Consequently, the final preprocessed dataset comprises a unified set of **18,616 genes** across all cancer types. The preprocessed, ready-to-use data are located in the respective cancer type folders (e.g., `Data/BRCA/`).
+
+* **Original Source**: `Data/xena_org_multiomics/`
+* **Model Input**: `Data/{Cancer_Type}/` (e.g., `Data/BRCA/HiSeqV2_common_samples_genes_sorted.tsv`)
+* **Global Network**: `Data/STRING_ppi_edgelist.tsv`
+
 
 #### 2. Training
 Train the EPIC model. This script initializes the heterogeneous graph, applies the Information Constrained GNN encoder, and optimizes the Event Prototyping objective.
