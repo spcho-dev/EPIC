@@ -8,7 +8,7 @@
 
 ## Key Features
 
-* **Heterogeneous Graph Integration**: Seamlessly integrates multi-omics data (Somatic Mutations, Gene Expression) and biological networks (PPI).
+* **Heterogeneous Graph Construction**: Seamlessly integrates multi-omics data (Somatic Mutations, Gene Expression) and biological networks (PPI).
 * **Event Prototyping**: Models mutation events by fusing patient and gene embeddings, scoring them based on distances to learnable "Driver" and "Passenger" prototypes.
 * **Information Constrained Graph Learning**: Introduces **Variance** and **Diversity** constraints on information flows to prevent feature collapse in deep GNNs.
 * **Personalized Prediction**: Prioritizes rare, patient-specific driver mutations that are often overlooked by population-based methods.
