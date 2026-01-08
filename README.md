@@ -5,7 +5,7 @@
 > **Paper**: *EPIC: Event Prototyping via Information Constrained graph learning for personalized cancer driver gene prediction* > **Authors**: Sang-Pil Cho and Young-Rae Cho
 
 
-## Key Features
+### Key Features
 
 * **Event Prototyping**: Models mutation events by fusing patient and gene embeddings, scoring them based on distances to learnable "Driver" and "Passenger" prototypes.
 * **Information Constrained Graph Learning**: Introduces **Variance** and **Diversity** constraints on information flows to prevent feature collapse in deep GNNs.
@@ -13,7 +13,7 @@
 * **Personalized Prediction**: Prioritizes rare, patient-specific driver mutations that are often overlooked by population-based methods.
 
 
-## Repository Structure
+### Repository Structure
 
 ```bash
 EPIC/
@@ -35,7 +35,7 @@ EPIC/
 ```
 
 
-## Model Architecture
+### Model Architecture
 The framework consists of two main components implemented in `model.py`:
 
 1. **EPIC Encoder (`EPIC` class)**
