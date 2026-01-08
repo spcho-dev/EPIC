@@ -41,10 +41,6 @@ EPIC/
 ## Model Architecture
 The framework consists of two main components implemented in `model.py`:
 
-1. **EPIC Encoder**: A Heterogeneous GNN (using `GATv2Conv`) that updates node embeddings while tracking "Information Flow" (residual updates) to enforce geometric constraints.
-
-2. **LinkPredictor**: A Prototypical Metric Learning head that projects patient-gene pairs into an event space and calculates priority scores based on distances to `Driver` and `Passenger` prototypes.
-
 1. **EPIC Encoder (`EPIC` class)**
    - A **Heterogeneous Graph Neural Network** (GNN) backbone based on `GATv2Conv`.
    - Aggregates multi-omics context from the **PPI network** (Gene-Gene) and **Mutation bipartite graph** (Patient-Gene).
@@ -57,32 +53,32 @@ The framework consists of two main components implemented in `model.py`:
    - **Scoring**: Calculates the priority score based on the relative Euclidean distance:
      $$Score = \|\mathbf{z} - \mathbf{p}_{passenger}\|^2 - \|\mathbf{z} - \mathbf{p}_{driver}\|^2$$
 
----
 
-## Usage
 
-### 1. Data Preparation
+### Usage
+
+#### 1. Data Preparation
 Place your raw data files in the `Data/` directory. The project expects the following structure for each cancer type (e.g., `BRCA`):
 * `pos-BRCA-genename.txt`: Ground truth driver genes.
 * `HiSeqV2_common_samples_genes_sorted.tsv`: Gene expression matrix.
 * `mc3_gene_level_common_samples_genes_sorted.tsv`: Somatic mutation matrix.
 * `STRING_ppi_edgelist.tsv`: Global PPI network file.
 
-### 2. Training
+#### 2. Training
 Train the EPIC model. This script initializes the heterogeneous graph, applies the Information Constrained GNN encoder, and optimizes the Event Prototyping objective.
 
 ```bash
 python train.py
 ```
 
-### 3. Prediction
+#### 3. Prediction
 Generate personalized driver gene rankings for each patient using the trained model.
 
 ```bash
 python predict.py
 ```
 
-### 4. Evaluation
+#### 4. Evaluation
 Evaluate the model's performance using Two-Track metrics (Cohort-level & Individual-level).
 
 **Cohort-level Evaluation** (Population-wide oncogenic signal detection):
