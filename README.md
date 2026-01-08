@@ -50,7 +50,7 @@ EPIC/
 │   ├── pos-HNSC-genename.txt
 │   ├── pos-LUAD-genename.txt
 │   ├── pos-PRAD-genename.txt
-│   └── STRING_ppi_edgelist.tsv  # Global PPI Network
+│   └── STRING_ppi_edgelist.tsv  # PPI Network
 ├── outputs/                     # Directory for prediction results and plots
 ├── trained_models/              # Directory for saving trained model weights
 ├── data_loader.py               # Data preprocessing and HeteroData construction
@@ -92,7 +92,7 @@ To ensure data consistency across modalities, we performed a rigorous preprocess
 
 * **Original Source**: `Data/xena_org_multiomics/`
 * **Multi-omics**: `Data/{Cancer_Type}/` (e.g., `Data/BRCA/HiSeqV2_common_samples_genes_sorted.tsv`)
-* **Global Network**: `Data/STRING_ppi_edgelist.tsv`
+* **PPI Network**: `Data/STRING_ppi_edgelist.tsv`
 * **Ground Truth**: `Data/pos-{Cancer_Type}-genename.txt` (List of known driver genes)
 
 
