@@ -87,7 +87,7 @@ To reproduce the results, we recommend using the following environment:
 ### 1. Data Preparation
 The raw multi-omics data were obtained from the **[UCSC Xena Browser](https://xenabrowser.net/datapages/)**. The original files (Gene Expression: `HiSeqV2` and Somatic Mutation: `mc3_gene_level`) are stored in the `Data/xena_org_multiomics/` directory.
 
-To ensure data consistency across modalities, we performed a rigorous preprocessing step. We intersected the samples and genes across the mutation and expression datasets, retaining only those entities present in both. Consequently, the final preprocessed dataset comprises a unified set of **18,616 genes** across all cancer types. The preprocessed, ready-to-use data are located in the respective cancer type folders (e.g., `Data/BRCA/`).
+To ensure data consistency across modalities, we performed a rigorous preprocessing step. We intersected the samples and genes across the mutation and expression datasets, retaining only those entities present in both. Consequently, the final preprocessed dataset comprises a unified set of 18,616 genes across all cancer types. The preprocessed, ready-to-use data are located in the respective cancer type folders (e.g., `Data/BRCA/`).
 
 * **Original Source**: `Data/xena_org_multiomics/`
 * **Multi-omics**: `Data/{Cancer_Type}/` (e.g., `Data/BRCA/HiSeqV2_common_samples_genes_sorted.tsv`)
