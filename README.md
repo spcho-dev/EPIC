@@ -41,7 +41,7 @@ EPIC/
 │   │   ├── BRCA/                # Original HiSeqV2 and mc3_gene_level files
 │   │   ├── HNSC/
 │   │   ├── LUAD/
-│   │   ├── PRAD/
+│   │   └── PRAD/
 │   ├── BRCA/                    # Preprocessed Cancer-specific data
 │   ├── HNSC/
 │   ├── LUAD/
