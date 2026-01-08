@@ -19,9 +19,6 @@
 
 The framework consists of two main components implemented in `model.py`:
 
-![EPIC Model Architecture](Refined_Heterogeneous_Graph.jpg)
-*(Note: Replace with your actual image path if available)*
-
 1. **EPIC Encoder (`EPIC` class)**
    - A **Heterogeneous Graph Neural Network** (GNN) backbone based on `GATv2Conv`.
    - Aggregates multi-omics context from the **PPI network** (Gene-Gene) and **Mutation bipartite graph** (Patient-Gene).
