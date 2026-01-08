@@ -1,51 +1,26 @@
-## EPIC: Event Prototyping via Information Constrained Graph Learning for personalized cancer driver gene prediction
+# EPIC: Event Prototyping via Information Constrained Graph Learning for Personalized Cancer Driver Gene Prediction
 
 **EPIC** is a novel deep learning framework for personalized cancer driver gene prediction. Unlike traditional node-centric approaches, EPIC redefines driver prediction as a metric learning task in an "event embedding space." It leverages a heterogeneous Graph Neural Network with an Information Constrained learning strategy to preserve patient-specific genomic contexts and prevent over-smoothing.
 
 > **Paper**: *EPIC: Event Prototyping via Information Constrained graph learning for personalized cancer driver gene prediction* > **Authors**: Sang-Pil Cho and Young-Rae Cho
 
+---
 
-### Key Features
+## 📌 Key Features
 
 * **Heterogeneous Graph Integration**: Seamlessly integrates multi-omics data (Somatic Mutations, Gene Expression) and biological networks (PPI).
 * **Event Prototyping**: Models mutation events by fusing patient and gene embeddings, scoring them based on distances to learnable "Driver" and "Passenger" prototypes.
 * **Information Constrained Graph Learning**: Introduces **Variance** and **Diversity** constraints on information flows to prevent feature collapse in deep GNNs.
 * **Personalized Prediction**: Prioritizes rare, patient-specific driver mutations that are often overlooked by population-based methods.
 
+---
 
-### Repository Structure
+## 🧠 Model Architecture
 
-```bash
-EPIC/
-├── Data/                        # Input data directory (TCGA mutations, expression, PPI)
-│   ├── xena_org_multiomics/     # Original raw data from UCSC Xena Browser
-│   │   ├── BRCA/                # Original HiSeqV2 and mc3_gene_level files
-│   │   ├── HNSC/
-│   │   ├── LUAD/
-│   │   └── PRAD/
-│   ├── BRCA/                    # Preprocessed Cancer-specific data
-│   ├── HNSC/
-│   ├── LUAD/
-│   ├── PRAD/
-│   ├── pos-BRCA-genename.txt
-│   ├── pos-HNSC-genename.txt
-│   ├── pos-LUAD-genename.txt
-│   ├── pos-PRAD-genename.txt
-│   └── STRING_ppi_edgelist.tsv
-├── outputs/                     # Directory for prediction results and plots
-├── trained_models/              # Directory for saving trained model weights
-├── data_loader.py               # Data preprocessing and HeteroData construction
-├── model.py                     # EPIC model architecture (GNN Encoder + LinkPredictor)
-├── train.py                     # Main training script
-├── predict.py                   # Inference script for generating patient-specific rankings
-├── evaluation_cohort.py         # Cohort-level performance evaluation
-├── evaluation_individual.py     # Individual-level (Personalized) performance evaluation
-└── README.md
-```
-
-
-### Model Architecture
 The framework consists of two main components implemented in `model.py`:
+
+![EPIC Model Architecture](Refined_Heterogeneous_Graph.jpg)
+*(Note: Replace with your actual image path if available)*
 
 1. **EPIC Encoder (`EPIC` class)**
    - A **Heterogeneous Graph Neural Network** (GNN) backbone based on `GATv2Conv`.
@@ -57,6 +32,37 @@ The framework consists of two main components implemented in `model.py`:
    - **Event Embedding**: Fuses the learned Patient and Gene embeddings into a unified latent vector representing the specific mutation event.
    - **Metric Learning**: Learns two global prototypes—**Driver Prototype** and **Passenger Prototype**.
    - **Scoring**: Calculates the priority score based on the relative Euclidean distance. The score is defined as the difference between the distance to the Passenger Prototype and the distance to the Driver Prototype. A higher score indicates that the event is closer to the Driver Prototype and further from the Passenger Prototype.
+
+---
+
+## 📂 Repository Structure
+
+```bash
+EPIC/
+├── Data/                        # Input data directory
+│   ├── xena_org_multiomics/     # Original raw data from UCSC Xena Browser
+│   │   ├── BRCA/                # Original HiSeqV2 and mc3_gene_level files
+│   │   ├── HNSC/
+│   │   ├── ...
+│   ├── BRCA/                    # Preprocessed Cancer-specific data
+│   ├── HNSC/
+│   ├── LUAD/
+│   ├── PRAD/
+│   ├── pos-BRCA-genename.txt    # Ground Truth Driver Genes
+│   ├── pos-HNSC-genename.txt
+│   ├── pos-LUAD-genename.txt
+│   ├── pos-PRAD-genename.txt
+│   └── STRING_ppi_edgelist.tsv  # Global PPI Network
+├── outputs/                     # Directory for prediction results and plots
+├── trained_models/              # Directory for saving trained model weights
+├── data_loader.py               # Data preprocessing and HeteroData construction
+├── model.py                     # EPIC model architecture (GNN Encoder + LinkPredictor)
+├── train.py                     # Main training script
+├── predict.py                   # Inference script for generating patient-specific rankings
+├── evaluation_cohort.py         # Cohort-level performance evaluation
+├── evaluation_individual.py     # Individual-level (Personalized) performance evaluation
+└── README.md
+```
 
 
 ### Requirements
