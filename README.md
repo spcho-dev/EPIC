@@ -96,21 +96,21 @@ To ensure data consistency across modalities, we performed a rigorous preprocess
 * **Ground Truth**: `Data/pos-{Cancer_Type}-genename.txt` (List of known driver genes)
 
 
-#### 2. Training
+### 2. Training
 Train the EPIC model. This script initializes the heterogeneous graph, applies the Information Constrained GNN encoder, and optimizes the Event Prototyping objective.
 
 ```bash
 python train.py
 ```
 
-#### 3. Prediction
+### 3. Prediction
 Generate personalized driver gene rankings for each patient using the trained model.
 
 ```bash
 python predict.py
 ```
 
-#### 4. Evaluation
+### 4. Evaluation
 Evaluate the model's performance using Two-Track metrics (Cohort-level & Individual-level).
 
 **Cohort-level Evaluation** (Population-wide oncogenic signal detection):
