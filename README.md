@@ -6,7 +6,7 @@
 
 ---
 
-## 📌 Key Features
+## Key Features
 
 * **Heterogeneous Graph Integration**: Seamlessly integrates multi-omics data (Somatic Mutations, Gene Expression) and biological networks (PPI).
 * **Event Prototyping**: Models mutation events by fusing patient and gene embeddings, scoring them based on distances to learnable "Driver" and "Passenger" prototypes.
@@ -15,7 +15,7 @@
 
 ---
 
-## 🧠 Model Architecture
+## Model Architecture
 
 The framework consists of two main components implemented in `model.py`:
 
@@ -35,7 +35,7 @@ The framework consists of two main components implemented in `model.py`:
 
 ---
 
-## 📂 Repository Structure
+## Repository Structure
 
 ```bash
 EPIC/
@@ -64,6 +64,7 @@ EPIC/
 └── README.md
 ```
 
+---
 
 ### Requirements
 
@@ -82,6 +83,7 @@ To reproduce the results, we recommend using the following environment:
 * **scipy** == 1.7.3
 * **matplotlib** >= 3.5.0  # Required for visualization
 
+---
 
 ### Usage
 
