@@ -59,6 +59,24 @@ The framework consists of two main components implemented in `model.py`:
    - **Scoring**: Calculates the priority score based on the relative Euclidean distance. The score is defined as the difference between the distance to the Passenger Prototype and the distance to the Driver Prototype. A higher score indicates that the event is closer to the Driver Prototype and further from the Passenger Prototype.
 
 
+### Requirements
+
+To reproduce the results, we recommend using the following environment:
+
+* **Python** >= 3.7
+* **PyTorch** == 1.9.1 (with CUDA 11.1)
+* **PyTorch Geometric** == 2.0.4
+    * `torch-scatter` == 2.0.8
+    * `torch-sparse` == 0.6.11
+    * `torch-cluster` == 1.5.9
+    * `torch-spline-conv` == 1.2.1
+* **pandas** == 1.3.5
+* **numpy** == 1.21.5
+* **scikit-learn** == 1.0.2
+* **scipy** == 1.7.3
+* **matplotlib** >= 3.5.0  # Required for visualization
+
+
 ### Usage
 
 ### 1. Data Preparation
