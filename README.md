@@ -64,7 +64,7 @@ EPIC/
 
 ---
 
-### Requirements
+## Requirements
 
 To reproduce the results, we recommend using the following environment:
 
@@ -83,7 +83,7 @@ To reproduce the results, we recommend using the following environment:
 
 ---
 
-### Usage
+## Usage
 
 ### 1. Data Preparation
 The raw multi-omics data were obtained from the **[UCSC Xena Browser](https://xenabrowser.net/datapages/)**. The original files (Gene Expression: `HiSeqV2` and Somatic Mutation: `mc3_gene_level`) are stored in the `Data/xena_org_multiomics/` directory.
