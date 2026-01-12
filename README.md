@@ -2,8 +2,6 @@
 
 **EPIC** is a novel deep learning framework for personalized cancer driver gene prediction. Unlike traditional node-centric approaches, EPIC redefines driver prediction as a metric learning task in an "event embedding space." It leverages a heterogeneous Graph Neural Network with an Information Constrained learning strategy to preserve patient-specific genomic contexts and prevent over-smoothing.
 
-> **Paper**: *EPIC: Event Prototyping via Information Constrained graph learning for personalized cancer driver gene prediction* > **Authors**: Sang-Pil Cho and Young-Rae Cho
-
 ---
 
 ## Key Features
