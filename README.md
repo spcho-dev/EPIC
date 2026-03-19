@@ -77,6 +77,8 @@ EPIC/
 └── README.md
 ```
 
+**Note:** The raw data for the performance curves shown in Figure 2 and Figure 3 of the manuscript can be found in the `evaluation_metrics/` folder. For the full list of predicted driver gene rankings, please refer to the `outputs/` directory.
+
 ---
 
 ## Requirements
