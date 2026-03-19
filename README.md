@@ -37,19 +37,36 @@ EPIC/
 ├── Data/                        # Input data directory (TCGA mutations, expression, PPI)
 │   ├── xena_org_multiomics/     # Original raw data from UCSC Xena Browser
 │   │   ├── BRCA/                # Original HiSeqV2 and mc3_gene_level files
+│   │   ├── COAD/
 │   │   ├── HNSC/
 │   │   ├── LUAD/
 │   │   └── PRAD/
 │   ├── BRCA/                    # Preprocessed Cancer-specific data
+│   ├── COAD/
 │   ├── HNSC/
 │   ├── LUAD/
 │   ├── PRAD/
 │   ├── pos-BRCA-genename.txt    # Ground Truth Driver Genes
+│   ├── pos-COAD-genename.txt
 │   ├── pos-HNSC-genename.txt
 │   ├── pos-LUAD-genename.txt
 │   ├── pos-PRAD-genename.txt
 │   └── STRING_ppi_edgelist.tsv  # PPI Network
-├── outputs/                     # Directory for prediction results and plots
+├── outputs/                     # Directory for prediction results
+├── evaluation_metrics/          # Quantitative evaluation results for plotting
+│   ├── cohort/                  # Cohort-level performance (Precision, Recall, F1)
+│   │   ├── DawnRank/            # Baseline: DawnRank cohort results (CSV)
+│   │   ├── EPIC/                # Proposed: EPIC cohort results (CSV)
+│   │   ├── IMCDriver/           # Baseline: IMCDriver cohort results (CSV)
+│   │   ├── PCoDG/               # Baseline: PCoDG cohort results (CSV)
+│   │   ├── PDRWH/               # Baseline: PDRWH cohort results (CSV)
+│   │   ├── PersonaDrive/        # Baseline: PersonaDrive cohort results (CSV)
+│   │   └── PRODIGY/             # Baseline: PRODIGY cohort results (CSV)
+│   └── individual/              # Individual-level (Personalized) performance
+│       ├── DawnRank/            # Patient-specific metrics for DawnRank
+│       ├── EPIC/                # Patient-specific metrics for EPIC
+│       ├── ...                  # (Other baseline models follow the same structure)
+│       └── PRODIGY/
 ├── trained_models/              # Directory for saving trained model weights
 ├── data_loader.py               # Data preprocessing and HeteroData construction
 ├── model.py                     # EPIC model architecture (GNN Encoder + LinkPredictor)
