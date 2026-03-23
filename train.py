@@ -22,7 +22,7 @@ DROPOUT_RATE = 0.3
 
 # Training Settings
 LEARNING_RATE = 1e-4
-EPOCHS = 1000   # 500 epochs for LUSC, 1000 epochs setting for other carcinomas by default
+EPOCHS = 1000
 WEIGHT_DECAY = 1e-5
 
 # Ensure save directory exists
