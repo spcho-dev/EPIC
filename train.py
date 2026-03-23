@@ -10,7 +10,7 @@ from data_loader import load_data
 from model import EPIC, LinkPredictor 
 
 # --- Hyperparameters & Configuration ---
-CANCER_TYPE = 'BRCA'
+CANCER_TYPE = 'BRCA'    # BRCA / COAD / HNSC / LUAD / PRAD
 DATA_DIR = Path('./Data')
 MODEL_SAVE_DIR = Path('./trained_models')
 
@@ -113,7 +113,7 @@ def compute_iff_loss(flow_dicts):
 # --- Main Training Flow ---
 
 if __name__ == "__main__":
-    # 1. Load Data
+    # Load Data
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print(f"Using device: {device}")
     
@@ -124,7 +124,7 @@ if __name__ == "__main__":
     num_genes = data['gene'].num_nodes
     num_patients = data['patient'].num_nodes
 
-    # 2. Initialize Models
+    # Initialize Models
     gnn = EPIC(
         num_genes=num_genes,
         num_patients=num_patients,
@@ -141,15 +141,15 @@ if __name__ == "__main__":
 
     loss_weighter = DynamicLossWeighter(num_losses=3).to(device)
 
-    # 3. Setup Optimizer (Includes model params and loss weights)
+    # Setup Optimizer (Includes model params and loss weights)
     parameters = list(gnn.parameters()) + list(predictor.parameters()) + list(loss_weighter.parameters())
     optimizer = optim.Adam(parameters, lr=LEARNING_RATE, weight_decay=WEIGHT_DECAY)
 
-    # 4. Setup Main Loss
+    # Setup Main Loss
     loss_fn_bce = FocalLoss(alpha=0.75, gamma=2.0) 
     print("Using Focal Loss (alpha=0.75, gamma=2.0) for the classification task.")
 
-    # 5. Training Loop
+    # Training Loop
     print("--- Starting Training (EPIC Framework) ---")
     
     true_labels = data['patient', 'mutates', 'gene'].edge_label
@@ -162,30 +162,30 @@ if __name__ == "__main__":
         
         optimizer.zero_grad()
         
-        # A. GNN Encoder Forward Pass
+        # GNN Encoder Forward Pass
         # Returns node embeddings and information flow vectors
         x_dict, flow_dicts = gnn(data)
         
-        # B. Link Predictor Forward Pass
+        # Link Predictor Forward Pass
         # Returns logits based on prototype distances
         pred_logits, _, _ = predictor(x_dict, pred_edge_index)
         pred_logits = pred_logits.squeeze(-1)
 
-        # C. Compute Losses
-        # C-1. Classification Loss (Focal)
+        # Compute Losses
+        # Classification Loss (Focal)
         loss_bce = loss_fn_bce(pred_logits, true_labels)
         
-        # C-2. Information Constraints (Variance & Diversity)
+        # Information Constraints (Variance & Diversity)
         loss_flow, loss_div = compute_iff_loss(flow_dicts)
         
-        # C-3. Weighted Total Loss (Dynamic Uncertainty Weighting)
+        # Weighted Total Loss (Dynamic Uncertainty Weighting)
         loss = loss_weighter(loss_bce, loss_flow, loss_div)
         
-        # D. Backpropagation
+        # Backpropagation
         loss.backward()
         optimizer.step()
         
-        # E. Logging
+        # Logging
         if epoch % 10 == 0 or epoch == 1:
             current_weights = loss_weighter.get_weights()
             w_bce, w_flow, w_div = current_weights[0], current_weights[1], current_weights[2]
@@ -196,7 +196,7 @@ if __name__ == "__main__":
 
     print("--- Training complete. ---")
 
-    # 6. Save Models
+    # Save Models
     torch.save(gnn.state_dict(), MODEL_SAVE_DIR / f'epic_gnn_{CANCER_TYPE}.pth')
     torch.save(predictor.state_dict(), MODEL_SAVE_DIR / f'epic_predictor_{CANCER_TYPE}.pth')
 
